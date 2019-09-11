@@ -3,33 +3,52 @@ import './index.css'
 import Vue from 'vue'
 import axios from 'axios'
 import url from 'js/api'
-
+import footBar from 'components/Foot.vue'
+import {InfiniteScroll} from 'mint-ui'
+Vue.use(InfiniteScroll)
 Vue.prototype.$ajax = axios;
+
+
 
 let app = new Vue({
   el: '#app',
   data: {
-    list: null
+    list: null,
+    pageNum: 1,
+    pageSize: 6,
+    loading: false,//false可以加载，true不能加载，默认为false
+    allLoaded: false//是否完全加载完成页面
   },
   created() {
     this.getHotList()
   },
-  methods:{
-    getHotList(){
+  methods: {
+    getHotList() {
+      this.loading = true
       this.$ajax({
-        method:'get',
-        url:url.hotLists,
-        // data:{pageNum: 1, pageSize: 6,}
+        method: 'get',
+        url: url.hotLists+`?pageNum=${this.pageNum}&pageSize=${this.pageSize}`,
       }).then(res => {
-        console.log(res, 'res')
-        this.list = res.data.list
-        console.log(this.data.list,'11111111111111')
-      }).catch(err=>{
-        console.log(err,'err')
+        let curLists = res.data.list
+        if (this.list) {//下拉刷新请求页面
+          if (this.pageNum >5){
+            return this.allLoaded = true
+          }
+          this.pageNum += 1
+          this.list = this.list.concat(curLists)
+        } else {//第一次请求数据
+          this.list = curLists
+        }
+        this.loading = false
+      }).catch(err => {
+        console.log(err, 'err')
       })
     }
+  },
+  components:{
+    footBar
   }
 })
 
 
-app.$mount('#app')
+app.$mount()
