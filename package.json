@@ -1,8 +1,8 @@
 {
   "name": "maijia",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "tony <fangtao_2008@163.com>",
+  "description": "",
+  "author": "",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "vue": "^2.3.3",
     "vue-router": "^2.6.0"
   },
