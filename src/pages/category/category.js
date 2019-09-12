@@ -68,7 +68,12 @@ let app = new Vue({
       }
     }
   },
-  components:{
+  filters:{//过滤器
+    twoNum: (n) => {
+      return n.toFixed(2)
+    }
+  },
+  components:{//组件加载
     footBar,
   }
 })
