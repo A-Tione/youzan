@@ -1,6 +1,6 @@
 let url = {
-  hotLists: '/index/hotLists',
-  banner: '/index/banner'
+  hotLists: '/index/hotLists',//商品列表
+  banner: '/index/banner',//首页banner
 }
 
 //开发环境和正式环境的切换
@@ -12,6 +12,5 @@ for (let key in url) {
     url[key] = host + url[key]
   }
 }
-
 
 export default url
