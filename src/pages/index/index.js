@@ -4,6 +4,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import url from 'js/api'
 import footBar from 'components/Foot.vue'
+import Swiper from 'components/Swiper.vue'
 import {InfiniteScroll} from 'mint-ui'
 Vue.use(InfiniteScroll)
 Vue.prototype.$ajax = axios;
@@ -13,6 +14,7 @@ Vue.prototype.$ajax = axios;
 let app = new Vue({
   el: '#app',
   data: {
+    banner: null,
     list: null,
     pageNum: 1,
     pageSize: 6,
@@ -20,9 +22,21 @@ let app = new Vue({
     allLoaded: false//是否完全加载完成页面
   },
   created() {
+    this.getBanner()
     this.getHotList()
   },
   methods: {
+    getBanner(){
+      this.$ajax({
+        method: 'get',
+        url: url.banner,
+      }).then(res => {
+        this.banner = res.data.list
+        console.log(this.banner,'banner')
+      }).catch(err => {
+        console.log(err, 'err')
+      })
+    },
     getHotList() {
       this.loading = true
       this.$ajax({
@@ -46,7 +60,8 @@ let app = new Vue({
     }
   },
   components:{
-    footBar
+    footBar,
+    Swiper
   }
 })
 
