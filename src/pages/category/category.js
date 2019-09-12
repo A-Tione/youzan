@@ -13,49 +13,59 @@ Vue.prototype.$ajax = axios;
 let app = new Vue({
   el: '#app',
   data: {
-    banner: null,
-    list: null,
-    pageNum: 1,
-    pageSize: 6,
-    loading: false,//false可以加载，true不能加载，默认为false
-    allLoaded: false//是否完全加载完成页面
+    topList: null,//一级分类列表
+    topListId: null,//一级分类选中id
+    topListIndex: 0,
+    rankList:null,//综合分类
+    subList: null,//二级分类
+
   },
   created() {
-    // this.getBanner()
-    // this.getHotList()
+    this.getTopList()
   },
   methods: {
-    getBanner(){
+    getTopList(){
       this.$ajax({
         method: 'get',
-        url: url.banner,
+        url: url.topList,
       }).then(res => {
-        this.banner = res.data.list
-        console.log(this.banner,'banner')
+        this.topList = res.data.list
+        if (this.topList){
+          this.topListId = this.topList[0].id
+          this.getSubListIndex()
+        }
       }).catch(err => {
         console.log(err, 'err')
       })
     },
-    getHotList() {
-      this.loading = true
+    getSubListIndex(){
       this.$ajax({
         method: 'get',
-        url: url.hotLists+`?pageNum=${this.pageNum}&pageSize=${this.pageSize}`,
+        url: url.rank,
       }).then(res => {
-        let curLists = res.data.list
-        if (this.list) {//下拉刷新请求页面
-          if (this.pageNum >5){
-            return this.allLoaded = true
-          }
-          this.pageNum += 1
-          this.list = this.list.concat(curLists)
-        } else {//第一次请求数据
-          this.list = curLists
-        }
-        this.loading = false
+        this.rankList = res.data
       }).catch(err => {
         console.log(err, 'err')
       })
+    },
+    getSubList(e){
+      this.$ajax({
+        method: 'get',
+        url: url.subList+`?id=${e}`,
+      }).then(res => {
+        this.subList = res.data.list
+      }).catch(err => {
+        console.log(err, 'err')
+      })
+    },
+    activeTopList(e,index){//切换一级分类
+      this.topListId = e
+      this.topListIndex = index
+      if (this.topListIndex===0){
+        this.getSubListIndex()
+      }else {
+        this.getSubList(this.topListId)
+      }
     }
   },
   components:{

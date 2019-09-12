@@ -1,6 +1,9 @@
 let url = {
   hotLists: '/index/hotLists',//商品列表
   banner: '/index/banner',//首页banner
+  topList: '/category/topList',//商品分类一级分类
+  rank: '/category/rank',//综合分类,
+  subList: '/category/subList',//商品分类二级分类
 }
 
 //开发环境和正式环境的切换
