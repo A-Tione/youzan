@@ -5,6 +5,7 @@ import axios from 'axios'
 import url from 'js/api'
 import footBar from 'components/Foot.vue'
 import {InfiniteScroll} from 'mint-ui'
+import mixin from 'js/mixin'
 
 Vue.use(InfiniteScroll)
 Vue.prototype.$ajax = axios;
@@ -76,11 +77,7 @@ let app = new Vue({
       location.href = `search.html?keyword=${item.name}&id=${item.id}`
     }
   },
-  filters:{//过滤器
-    twoNum: (n) => {
-      return n.toFixed(2)
-    }
-  },
+  mixins: [mixin],//混合
   components:{//组件加载`
     footBar,
   }
