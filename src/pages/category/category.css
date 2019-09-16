@@ -764,7 +764,8 @@ html {
 .class-category,
 .class-nav {
   height: 100%;
-  overflow: hidden
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .class-category {
@@ -1044,7 +1045,7 @@ only screen and (min-device-pixel-ratio:1.5) {
 
 .shop-images li {
   position: relative;
-  width: 32%;
+  width: 31%;
   box-sizing: border-box;
   margin-right: 2%;
   display: inline-block;

@@ -17,6 +17,9 @@ let app = new Vue({
     topListId: null,//一级分类选中id
     topListIndex: 0,
     rankList:null,//综合分类
+    hotGoods: null,//热榜商品
+    hotShops: null,//关注商品
+    hotKeyWords: null,//热搜词排行
     subList: null,//二级分类
 
   },
@@ -44,6 +47,9 @@ let app = new Vue({
         url: url.rank,
       }).then(res => {
         this.rankList = res.data
+        this.hotGoods = res.data.hotGoods
+        this.hotShops = res.data.hotShops
+        this.hotKeyWords = res.data.hotKeyWords
       }).catch(err => {
         console.log(err, 'err')
       })
@@ -73,7 +79,7 @@ let app = new Vue({
       return n.toFixed(2)
     }
   },
-  components:{//组件加载
+  components:{//组件加载`
     footBar,
   }
 })

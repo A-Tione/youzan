@@ -1,16 +1,19 @@
 <template>
   <div class="bottom-nav">
     <ul>
-      <li class="active"><a href="index.html"><i class="icon-home"></i>
+      <li :class="{active:active==='index'}"><a href="index.html"><i class="icon-home"></i>
         <div>有赞</div>
       </a></li>
-      <li><a href="category.html"><i class="icon-category"></i>
+      <li :class="{active:active==='category'}"><a href="category.html"><i
+        class="icon-category"></i>
         <div>分类</div>
       </a></li>
-      <li><a href="https://h5.youzan.com/v2/trade/cart?f_platform=yzapp&amp;source=yzapp"><i class="icon-cart"></i>
+      <li :class="{active:active==='cart'}"><a
+        href="cart.html"><i class="icon-cart"></i>
         <div>购物车</div>
       </a></li>
-      <li><a href="https://h5.youzan.com/v2/buyer/member"><i class="icon-user"></i>
+      <li :class="{active:active==='member'}"><a
+        href="member.html"><i class="icon-user"></i>
         <div>我</div>
       </a></li>
     </ul>
@@ -19,8 +22,18 @@
 
 <script>
   export default {
-    name: "Foot"
+    name: "Foot",
+
+    props: {
+      active: {
+        type: String,
+        default() {
+          return 'index'
+        }
+      }
+    },
   }
+
 </script>
 
 <style scoped>
@@ -37,9 +50,7 @@
     border-top: 2px solid #e5e5e5
   }
 
-  @media only screen and (-webkit-min-device-pixel-ratio:1.5),
-  only screen and (min--moz-device-pixel-ratio:1.5),
-  only screen and (min-device-pixel-ratio:1.5) {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
     .bottom-nav {
       border-top-width: 1px
     }
