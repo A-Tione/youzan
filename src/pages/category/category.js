@@ -46,7 +46,6 @@ let app = new Vue({
         method: 'get',
         url: url.rank,
       }).then(res => {
-        this.rankList = res.data
         this.hotGoods = res.data.hotGoods
         this.hotShops = res.data.hotShops
         this.hotKeyWords = res.data.hotKeyWords
@@ -72,6 +71,9 @@ let app = new Vue({
       }else {
         this.getSubList(this.topListId)
       }
+    },
+    toSeach(item){
+      location.href = `search.html?keyword=${item.name}&id=${item.id}`
     }
   },
   filters:{//过滤器
