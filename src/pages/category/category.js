@@ -75,6 +75,9 @@ let app = new Vue({
     },
     toSeach(item){
       location.href = `search.html?keyword=${item.name}&id=${item.id}`
+    },
+    toGoods(id){
+      location.href = `goods.html?id=${id}`
     }
   },
   mixins: [mixin],//混合

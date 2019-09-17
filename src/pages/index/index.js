@@ -57,6 +57,9 @@ let app = new Vue({
       }).catch(err => {
         console.log(err, 'err')
       })
+    },
+    toGoods(id){
+      location.href = `goods.html?id=${id}`
     }
   },
   components:{

@@ -23,7 +23,7 @@
 </head>
 
 <body class=" " style="min-height: 667px;">
-  <div id="app" class="container with-top-search" style="min-height: 667px;" ref="app" @touchmove="move">
+  <div id="app" class="container with-top-search" style="min-height: 667px;" ref="app">
     <div class="custom-search js-search-bar">
       <form>
         <input type="search" class="custom-search-input" autocomplete="off" name="keyword" v-model="keyword" placeholder="搜索更赞的商品" style="padding-left: 66px;">
@@ -55,10 +55,10 @@
             v-infinite-scroll="getSearchList"
             infinite-scroll-disabled="loading"
             infinite-scroll-distance="100">
-          <li v-for="(item,index) in list" :key="item.id" class="goods-item">
+          <li v-for="(item,index) in list" :key="item.id" @click="toGoods(item.id)" class="goods-item">
               <div class="thumb">
                 <img :src="item.image">
-                <i v-if="item.isOut" class="sell-out"></i>
+                <!--<i v-if="item.isOut" class="sell-out"></i>-->
               </div>
               <div class="detail">
                 <div class="title">{{item.name}}</div>
