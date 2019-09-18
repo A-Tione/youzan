@@ -18,16 +18,28 @@ Vue.prototype.$ajax = axios;
 let app = new Vue({
   el: '#app',
   data: {
-    detail: {
-      identification:null,
-      imgs:null,
-    },
-    imgList: null,
-
+    id:null,
+    detail: null,
+    dealList:null,//交易列表
+    detailTab:['商品详情','本店成交'],
+    tabIndex:0,
+    skuType: 1,//sku规格选择
+    showSku: false,
+    skuNum:1,//sku数量
+    isAddCart: false,
+    showAddMessage: false,
   },
   created() {
     this.id = this.getQueryVariable('id') || ''
     this.details()
+  },
+  watch:{
+    showSku(val,oldVal){
+      document.body.style.overflow = val?'hidden':'auto'
+      document.querySelector('html').style.overflow = val?'hidden':'auto'
+      // document.body.style.height = val?'100%':'auto'
+      // document.querySelector('html').style.height = val?'100%':'auto'
+    }
   },
 
   methods: {
@@ -39,6 +51,46 @@ let app = new Vue({
         this.detail = res.data.data
       }).catch(err => {
         console.log(err, 'err')
+      })
+    },
+    deals(){
+      this.$ajax({
+        method: 'get',
+        url: url.goodsDeal+`?id=${this.id}`,
+      }).then(res => {
+        this.dealList = res.data.list
+      }).catch(err => {
+        console.log(err, 'err')
+      })
+    },
+    changeTable(index){
+      this.tabIndex = index
+      if (index===1){
+        this.deals()
+      }
+    },
+    chooseSku(type){
+      this.skuType = type
+      this.showSku = true
+    },
+    minNum(e){//修改商品数量
+      if (e<0 && this.skuNum ===1){return}
+      this.skuNum += e
+    },
+    addCart(){//加入购物车
+      this.$ajax.post(url.cartAdd,{
+        id:this.id,
+        number: this.skuNum
+      }).then(res=>{
+        if (res.data.code===1){
+          this.showSku = false
+          this.isAddCart = true
+          this.showAddMessage = true
+
+          setTimeout(()=>{
+            this.showAddMessage = false
+          },1000)
+        }
       })
     },
 

@@ -2,9 +2,9 @@
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div v-for="item in list" class="swp-page swiper-slide">
-        <a class="js-no-follow" :href="item.url">
+        <a class="js-no-follow" :href="item.url || '#'">
           <div class="thumb img-box">
-            <img class="goods-main-photo fadeIn" :src="item.img">
+            <img class="goods-main-photo fadeIn" :src="item.img || item">
           </div>
         </a>
       </div>
@@ -57,7 +57,7 @@
     height: 100%;
   }
   .swiper-container {
-    height: 100%;
+    height: 300px;
     margin: 0 auto;
     position: relative;
     overflow: hidden;

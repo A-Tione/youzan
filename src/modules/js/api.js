@@ -6,6 +6,8 @@ let url = {
   subList: '/category/subList',//商品分类二级分类
   searchList: '/search/list',//商品列表
   goodsDetails: '/goods/details',//获取商品详情
+  goodsDeal: '/goods/deal',//商品的交易列表
+  cartAdd: '/cart/add',//加入购物车
 }
 
 //开发环境和正式环境的切换
