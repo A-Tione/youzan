@@ -54,8 +54,10 @@
     bottom: 0;
     max-width: 100%;
     max-height: 100%;
+    height: 100%;
   }
   .swiper-container {
+    height: 100%;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
@@ -67,6 +69,7 @@
   .swiper-wrapper {
     position: relative;
     width: 100%;
+    height: 100%;
     -webkit-transition-property: -webkit-transform, left, top;
     -webkit-transition-duration: 0s;
     -webkit-transform: translateZ(0);
@@ -162,6 +165,9 @@
 
   .swp .swp-page:first-child {
     display: block
+  }
+  .js-no-follow{
+    height: 100%;
   }
 
 

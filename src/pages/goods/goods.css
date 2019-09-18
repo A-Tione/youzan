@@ -4634,3 +4634,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 .bottom-fix {
   padding: 0
 }
+
+.custom-goods-swiper{
+  height: 300px;
+}

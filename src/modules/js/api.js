@@ -5,6 +5,7 @@ let url = {
   rank: '/category/rank',//综合分类,
   subList: '/category/subList',//商品分类二级分类
   searchList: '/search/list',//商品列表
+  goodsDetails: '/goods/details',//获取商品详情
 }
 
 //开发环境和正式环境的切换

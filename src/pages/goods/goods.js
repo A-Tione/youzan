@@ -9,38 +9,34 @@ import './goods_base.css'
 import Vue from 'vue'
 import axios from 'axios'
 import url from 'js/api'
+import Swiper from 'components/Swiper.vue'
+import mixin from 'js/mixin'
+
 Vue.prototype.$ajax = axios;
 
 
 let app = new Vue({
   el: '#app',
   data: {
+    detail: {
+      identification:null,
+      imgs:null,
+    },
+    imgList: null,
 
   },
   created() {
     this.id = this.getQueryVariable('id') || ''
-    this.keyword = this.getQueryVariable('keyword') || ''
-    this.getSearchList()
+    this.details()
   },
 
   methods: {
-    getSearchList(){
-      this.loading = true
+    details(){
       this.$ajax({
         method: 'get',
-        url: url.searchList+`?id=${this.id}&keyword=${this.keyword}`,
+        url: url.goodsDetails+`?id=${this.id}`,
       }).then(res => {
-        let curLists = res.data.list
-        if (this.list){
-          if (this.pageNum >5){
-            return this.allLoaded = true
-          }
-          this.pageNum += 1
-          this.list = this.list.concat(curLists)
-        }else {
-          this.list = curLists
-        }
-        this.loading = false
+        this.detail = res.data.data
       }).catch(err => {
         console.log(err, 'err')
       })
@@ -58,8 +54,9 @@ let app = new Vue({
     },
   },
 
+  mixins: [mixin],//混合
   components: {//组件加载`
-
+    Swiper,
   }
 })
 
