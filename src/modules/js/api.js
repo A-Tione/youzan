@@ -8,6 +8,10 @@ let url = {
   goodsDetails: '/goods/details',//获取商品详情
   goodsDeal: '/goods/deal',//商品的交易列表
   cartAdd: '/cart/add',//加入购物车
+  cartList: '/cart/list',//购物车列表
+  cartReduce: '/cart/reduce',//购物车移除商品
+  cartRemove: '/cart/remove',//删除购物车单个商品
+  cartMremove: '/cart/mremove',//删除购物车多个商品
 }
 
 //开发环境和正式环境的切换

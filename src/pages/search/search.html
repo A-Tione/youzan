@@ -55,7 +55,7 @@
         <ul class="js-list"
             v-infinite-scroll="getSearchList"
             infinite-scroll-disabled="loading"
-            infinite-scroll-distance="100">
+            infinite-scroll-distance="10">
           <li v-for="(item,index) in list" :key="item.id" @click="toGoods(item.id)" class="goods-item">
               <div class="thumb">
                 <img :src="item.image">
