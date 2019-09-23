@@ -76,7 +76,7 @@
                           <!---->
                           <div class="quantity">
                             <button type="button" class="minus" :class="{disabled: item.number===1}"></button>
-                            <input type="number" pattern="[0-9]*" class="txt" v-model="item.number" @focus="onFocus(item.number)" @blur="onBlur(item.number)">
+                            <input type="number" pattern="[0-9]*" class="txt" v-model="item.number" @focus="onFocus(item)" @blur="onBlur(item)">
                             <button type="button" class="plus "></button>
                             <div class="response-area response-area-minus" @click="reduce(item)"></div>
                             <div class="response-area response-area-plus"  @click="add(item)"></div>

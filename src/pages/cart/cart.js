@@ -23,6 +23,7 @@ let app = new Vue({
     removePopup: false,
     removeMsg: '',
     removeData: null,
+    oldNum: null,
   },
   computed: {
     allSelected: {
@@ -165,7 +166,7 @@ let app = new Vue({
       this.removePopup = true
       this.removeMsg = `确定将所选${this.removeLists.length}个商品删除？`
     },
-    removeConfirm() {//删除单个商品
+    removeConfirm() {//删除单个/多个商品
       if (this.removeMsg === '确定要删除该商品吗？') {
         let {shop, shopIndex, good, goodIndex} = this.removeData
         this.$ajax.delete(url.cartRemove, {
@@ -228,11 +229,16 @@ let app = new Vue({
       }
       volecity(this.$refs[`goods-${shopIndex}-${index}`], {left})
     },
-    onFocus(e){
-      console.log(e,'onFocus')
+    onFocus(e) {
+      console.log(e.number, 'onFocus')
+      this.oldNum = e.number
+
     },
-    onBlur(e){
-      console.log(e,'onBlur')
+    onBlur(e) {
+      console.log(e.number, 'onBlur')
+      if (!e.number || e.number<1) {
+        e.number = this.oldNum
+      }
     },
   },
 
