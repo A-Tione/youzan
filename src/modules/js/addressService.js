@@ -6,16 +6,16 @@ class Address{
     return fetch('get',url.addressLists)
   }
   static add(data){
-    return fetch('get',url.addressAdd,data)
+    return fetch('post',url.addressAdd,data)
   }
   static remove(id){
-    return fetch('get',url.addressRemove,id)
+    return fetch('post',url.addressRemove,id)
   }
   static update(data){
     return fetch('get',url.addressUpdate,data)
   }
   static setDefault(id){
-    return fetch('get',url.addressSetDefault,id)
+    return fetch('post',url.addressSetDefault,id)
   }
 
 
