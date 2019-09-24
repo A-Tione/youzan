@@ -12,6 +12,11 @@ let url = {
   cartReduce: '/cart/reduce',//购物车移除商品
   cartRemove: '/cart/remove',//删除购物车单个商品
   cartMremove: '/cart/mremove',//删除购物车多个商品
+  addressLists: '/address/list',//地址列表
+  addressAdd:'/address/add',//地址添加
+  addressRemove:'/address/remove',//地址删除
+  addressUpdate:'/address/update',//地址编辑
+  addressSetDefault:'/address/setDefault',//默认地址
 }
 
 //开发环境和正式环境的切换

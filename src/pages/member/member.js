@@ -1,27 +1,35 @@
 import 'css/common.css'
-import './member.css'
-import './member_base.css'
 import Vue from 'vue'
-import axios from 'axios'
-import url from 'js/api'
-import footBar from 'components/Foot.vue'
-
-Vue.prototype.$ajax = axios;
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 
 
-let app = new Vue({
-  el: '#app',
-  data: {
+const routes = [{
+  path: '/',
+  component: require('./components/member')
+}, {
+  path:'/address',
+  component: require('./components/address'),
+  children: [
+    {
+      path: '',
+      redirect: 'all'
+    },{
+      path: 'all',
+      name:'all',
+      component: require('./components/all')
+    },{
+      path: 'form',
+      name: 'form',
+      component: require('./components/form')
+    },
+  ]},
+  ]
 
-  },
-  created() {
-
-  },
-
-  components:{//组件加载`
-    footBar,
-  }
+const router = new VueRouter({
+  routes
 })
 
-
-app.$mount()
+const app = new Vue({
+  router
+}).$mount('#app')
