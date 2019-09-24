@@ -104,6 +104,7 @@ let app = new Vue({
           shop.goodsList.forEach(goods => {
             goods.checked = true
             goods.removeChecked = false
+            goods.editing = false
           })
         })
         this.shopsList = list
@@ -215,19 +216,25 @@ let app = new Vue({
         shop.editingMeg = '编辑'
       })
     },
-    onStart(e, good) {//滑动开始
-      good.startX = e.changedTouches[0].clientX
+    onStart(event, good,e) {//滑动开始
+      // if (!e.editing){
+        good.startX = event.changedTouches[0].clientX
+      // }
     },
-    onEnd(e, shopIndex, good, index) {//滑动结束   X轴相减
-      let endX = e.changedTouches[0].clientX
-      let left = '0'
-      if (good.startX - endX > 100) {
-        left = '-60px'
-      }
-      if (endX - good.startX > 100) {
-        left = '0px'
-      }
-      volecity(this.$refs[`goods-${shopIndex}-${index}`], {left})
+    onEnd(event, shopIndex, good, index,e) {//滑动结束   X轴相减
+      // if (!e.editing) {
+        let endX = event.changedTouches[0].clientX
+        let left = '0'
+        if (good.startX - endX > 100) {
+          // left = '-60px'
+          good.editing = true
+        }
+        if (endX - good.startX > 100) {
+          // left = '0px'
+          good.editing = false
+        }
+        volecity(this.$refs[`goods-${shopIndex}-${index}`], {left})
+      // }
     },
     onFocus(e) {
       console.log(e.number, 'onFocus')

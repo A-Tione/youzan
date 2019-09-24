@@ -47,10 +47,10 @@
                 <li v-for="(item,index) in e.goodsList"
                     :key="item.id"
                     :ref="'goods-'+shopIndex+'-'+index"
-                    :class="{editing: e.editing}"
+                    :class="{editing: e.editing || item.editing}"
                     class="block-item block-item-cart"
-                    @touchstart="onStart($event,item)"
-                    @touchend="onEnd($event,shopIndex,item,index)">
+                    @touchstart="onStart($event,item,e)"
+                    @touchend="onEnd($event,shopIndex,item,index,e)">
                   <div>
                     <div class="check-container" @click="selectGood(item,e)">
                       <span class="check" :class="{checked: editingShop?item.removeChecked : item.checked}"></span>
@@ -67,12 +67,12 @@
                           {{item.sku}}
                         </p>
                         <!-- 显示状态 -->
-                        <div v-show="!e.editing" class="num">
+                        <div v-show="!e.editing || !item.editing" class="num">
                           ×<span class="num-txt">{{item.number}}</span>
                           <!---->
                         </div>
                         <!-- 编辑状态 -->
-                        <div v-show="e.editing" class="num" style="display: none;">
+                        <div v-show="e.editing || item.editing" class="num" style="display: none;">
                           <!---->
                           <div class="quantity">
                             <button type="button" class="minus" :class="{disabled: item.number===1}"></button>
