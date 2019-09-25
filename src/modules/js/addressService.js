@@ -12,7 +12,7 @@ class Address{
     return fetch('post',url.addressRemove,id)
   }
   static update(data){
-    return fetch('get',url.addressUpdate,data)
+    return fetch('post',url.addressUpdate,data)
   }
   static setDefault(id){
     return fetch('post',url.addressSetDefault,id)

@@ -6,7 +6,7 @@
          :class="{'address-item-default': item.isDefault}"
          class="block-item js-address-item address-item" @click="toEdit(item)">
         <div class="address-title">{{item.name}} {{item.tel}}</div>
-        <p>{{item.provinceName}}{{item.cityName}}{{item.districtName}}{{item.aaddress}}</p>
+        <p>{{item.provinceName}}{{item.cityName}}{{item.districtName}}{{item.address}}</p>
       </a>
     </div>
     <div v-if="list&&!list.length">
@@ -22,18 +22,26 @@
 </template>
 
 <script>
-  import Address from 'js/addressService'
+  // import Address from 'js/addressService'
   export default {
     name: "all",
-    data(){
-      return{
-        list: null,
+    // data(){
+    //   return{
+    //     list: null,
+    //   }
+    // },
+    computed:{
+      list(){
+        return this.$store.state.list
       }
     },
     created(){
-      Address.list().then(res=>{
-        this.list = res.data.list
-      })
+      if (!this.list){
+        this.$store.dispatch('getList')
+      }
+      // Address.list().then(res=>{
+      //   this.list = res.data.list
+      // })
 
     },
     methods: {

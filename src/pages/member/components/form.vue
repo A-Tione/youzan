@@ -49,6 +49,7 @@
 
 <script>
   import Address from 'js/addressService'
+  import { mapState } from 'vuex'
 
   export default {
     data() {
@@ -65,7 +66,23 @@
         addressData: require('js/address'),
         cityList: null,//区列表
         districtList: null,//城市列表
+        status: true,
       }
+    },
+    // computed:{
+    //   list(){
+    //     return this.$store.state.list
+    //   }
+    // },
+    // computed: mapState([
+    //   // 映射 this.count 为 store.state.count
+    //   'list'
+    // ]),
+    computed: {
+      // 使用对象展开运算符将此对象混入到外部对象中
+      ...mapState({
+        list: state => state.list
+      })
     },
     watch: {
       provinceValue(val) {
@@ -80,8 +97,11 @@
           this.cityList = list[index].children
           this.cityValue = ''
           this.districtValue = ''
-          if (this.type === 'edit') {
-            this.cityValue = parseInt(this.instance.cityValue)
+          if (status) {
+            this.status = false
+            if (this.type === 'edit') {
+              this.cityValue = parseInt(this.instance.cityValue)
+            }
           }
         }
       },
@@ -95,10 +115,19 @@
           })
           this.districtList = list[index].children
           this.districtValue = ''
-          if (this.type === 'edit') {
-            this.districtValue = parseInt(this.instance.districtValue)
+          if (status) {
+            this.status = false
+            if (this.type === 'edit') {
+              this.districtValue = parseInt(this.instance.districtValue)
+            }
           }
         }
+      },
+      list:{
+        handler(){
+          this.$router.go(-1)
+        },
+        deep:true
       }
     },
     created() {
@@ -119,27 +148,32 @@
         let {name, tel, provinceValue, cityValue, districtValue, address} = this
         let data = {name, tel, provinceValue, cityValue, districtValue, address}
         if (this.type === 'add') {
-          Address.add(data).then(res => {
-            this.$router.go(-1)
-          })
+          // Address.add(data).then(res => {
+          //   this.$router.go(-1)
+          // })
+          this.$store.dispatch('addAction',data)
+          // this.$router.go(-1)
         } else if (this.type === 'edit') {
           data.id = this.id
-          Address.add(data).then(res => {
-            this.$router.go(-1)
-          })
+          // Address.add(data).then(res => {
+          //   this.$router.go(-1)
+          // })
+          this.$store.dispatch('updateAction',data)
         }
       },
       remove() {
         if (window.confirm('确认删除')) {
-          Address.remove(this.id).then(res => {
-            this.$router.go(-1)
-          })
+          // Address.remove(this.id).then(res => {
+          //   this.$router.go(-1)
+          // })
+          this.$store.dispatch('removeActions',this.id)
         }
       },
       setDefault() {
-        Address.setDefault(this.id).then(res => {
-          this.$router.go(-1)
-        })
+        // Address.setDefault(this.id).then(res => {
+        //   this.$router.go(-1)
+        // })
+        this.$store.dispatch('setDefaultAction',this.id)
       }
     },
   }

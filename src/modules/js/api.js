@@ -15,7 +15,7 @@ let url = {
   addressLists: '/address/list',//地址列表
   addressAdd:'/cart/add',//地址添加
   addressRemove:'/cart/remove',//地址删除
-  addressUpdate:'/address/update',//地址编辑
+  addressUpdate:'/cart/add',//地址编辑
   addressSetDefault:'/cart/remove',//默认地址
 }
 
